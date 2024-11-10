@@ -75,4 +75,17 @@ router.get('/get/songname/:songName', passport.authenticate('jwt', { session: fa
   }
 );
 
+//get all song
+router.get('/get/allsongs',passport.authenticate('jwt',{session:false}),
+async(req,res)=>{
+  try{
+const allSongs=await Song.find({})
+return res.status(200).json({success:true,message:"Getting song successfully",data:allSongs})
+  }catch(error){
+    return res.status(500).json({ success: false, message: "Server error", error: error.message });
+
+  }
+}
+)
+
 module.exports = router;
