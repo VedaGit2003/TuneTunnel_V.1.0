@@ -17,7 +17,8 @@ const app = express();
 
 //cors setting
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow requests from the frontend
+    // origin: 'http://localhost:3000', // Allow requests from the frontend
+    origin:'https://tunetunnel-v-1-0-1.onrender.com',
     methods: 'GET,POST,PUT,DELETE', // Specify allowed methods
     allowedHeaders: 'Content-Type,Authorization', // Specify allowed headers
 }));
