@@ -151,7 +151,7 @@ console.log(error)
             {createPlaylistModal && <CreatePlay closeModal={()=>{setCreatePlaylistModal(false)}}/>}
             {addToPlaylistSong && <AddToPlaylist closeModal={()=>{setAddToPlaylistSong(false)}} addSongToPlaylist={addSongToPlaylist}/>}
             
-            <div className={`${currentSong ? "h-9/10":"h-full"} w-full flex`}>
+            <div className={`${currentSong ? "h-8/10 md:h-9/10":"h-full"} w-full flex`}>
                 <div className='resize-x overflow-auto h-full min-w-18 sm:min-w-70 bg-black flex flex-col p-2'>
                     <div className='h-fit w-full flex flex-row justify-center items-center mb-3'>
                         <Icon icon="simple-icons:audioboom" width="54" height="54" style={{ color: '#1ebe30' }} />
@@ -268,7 +268,7 @@ console.log(error)
         } */}
                         {/* Bottom Play Bar */}
                         {currentSong && (
-                    <div className='w-full h-1/10 p-0 m-0 bg-gray-900 text-white flex items-center'>
+                    <div className='w-full h-2/10 md:h-1/10 p-0 m-0 bg-gray-900 text-white flex items-start md:items-center'>
                         <div className='w-1/4 flex items-center'>
                             <img
                                 src={currentSong.thumbnail}
@@ -276,18 +276,18 @@ console.log(error)
                                 alt='Song Thumbnail'
                             />
                             <div className='pl-1 md:pl-4'>
-                                <div className='text-xs md:text-sm hover:underline cursor-pointer'>
+                                <div className='hidden md:block  text-xs md:text-sm hover:underline cursor-pointer'>
                                     {currentSong.name}
                                 </div>
-                                <div className='text-xs md:text-xs hover:underline cursor-pointer text-gray-500'>
+                                <div className='hidden md:block  text-xs md:text-xs hover:underline cursor-pointer text-gray-500'>
                                     {currentSong.artist.firstName + " " + currentSong.artist.lastName}
                                 </div>
                             </div>
                         </div>
-                        <div className='w-1/2 h-full flex justify-center flex-col items-center'>
+                        <div className='w-1/2 h-full flex justify-start md:justify-center flex-col items-center'>
 
                             {/* Control Icons */}
-                            <div className='flex w-3/4 justify-evenly mb-1'>
+                            <div className='flex w-3/4 justify-evenly  mb-1'>
                                 <Icon className='cursor-not-allowed' icon="icon-park-outline:shuffle-one" width="24" height="24" style={{ color: "#00f56a" }} fontSize={20} />
                                 <Icon className='cursor-not-allowed' icon="solar:skip-previous-bold" style={{ color: "#00f56a" }} fontSize={20} />
                                 <Icon
@@ -302,14 +302,15 @@ console.log(error)
 
                             {/* Seek Bar */}
                             <input
+                            
                                 type="range"
                                 min="0"
                                 max={duration || 0}
                                 value={progress}
                                 onChange={handleSeekChange}
-                                className="w-2/3 h-0.5 mt-2 cursor-pointer bg-gray-500 accent-green-500"
+                                className="hidden md:block w-2/3 h-0.5 mt-2 cursor-pointer bg-gray-500 accent-green-500"
                             />
-                            <div className="text-xs text-gray-400 mt-1">
+                            <div className="hidden md:block text-xs text-gray-400 mt-1">
                                 {formatTime(progress)} / {formatTime(duration)}
                             </div>
                         </div>
