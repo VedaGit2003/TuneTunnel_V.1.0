@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from '../shared/Card'
+import songContext from '../../contexts/songContext'
 
 const Playlistview = ({Title,cardsData}) => {
+    // const [currentSong,setCurrentsong]=useContext(songContext)
   return (
     <div className='flex w-full p-3 flex-col mt-1'>
         <div className='font-semibold text-xl text-white mb-3'>{Title}</div>
@@ -14,6 +16,9 @@ const Playlistview = ({Title,cardsData}) => {
                                 // Title={item.title}
                                 Title={item.name}
                                 Description="this is a playlist"
+                                track={item.track}
+                                Song={item}
+                                // setCurrentsong={setCurrentsong}
                                 // imageUrl={item.imgUrl}
                                 imageUrl={item.thumbnail}
                             />

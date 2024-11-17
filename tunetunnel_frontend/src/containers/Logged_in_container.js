@@ -280,7 +280,7 @@ console.log(error)
                                     {currentSong.name}
                                 </div>
                                 <div className='hidden md:block  text-xs md:text-xs hover:underline cursor-pointer text-gray-500'>
-                                    {currentSong.artist.firstName + " " + currentSong.artist.lastName}
+                                    {currentSong.artist?.firstName + " " + currentSong.artist?.lastName}
                                 </div>
                             </div>
                         </div>
@@ -342,7 +342,7 @@ console.log(error)
                         </div>
                     </div>
                 )}
-                <div className='h-1/10 w-full p-3 absolute bg-black flex justify-center '>
+                <div className='h-1/10 w-full p-3 absolute bg-black flex justify-center items-end'>
                 <h3 className='font-bold from-purple-600 via-red-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent'>Crafted with <span className='z-20 '>❤️</span> by Veda's</h3>
                 </div>
         </div>
