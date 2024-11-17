@@ -151,7 +151,7 @@ console.log(error)
             {createPlaylistModal && <CreatePlay closeModal={()=>{setCreatePlaylistModal(false)}}/>}
             {addToPlaylistSong && <AddToPlaylist closeModal={()=>{setAddToPlaylistSong(false)}} addSongToPlaylist={addSongToPlaylist}/>}
             
-            <div className={`${currentSong ? "h-8/10 md:h-9/10":"h-full"} w-full flex`}>
+            <div className={`${currentSong ? "h-8/10 md:h-8/10":"h-full"} w-full flex`}>
                 <div className='resize-x overflow-auto h-full min-w-18 sm:min-w-70 bg-black flex flex-col p-2'>
                     <div className='h-fit w-full flex flex-row justify-center items-center mb-3'>
                         <Icon icon="simple-icons:audioboom" width="54" height="54" style={{ color: '#1ebe30' }} />
@@ -268,7 +268,7 @@ console.log(error)
         } */}
                         {/* Bottom Play Bar */}
                         {currentSong && (
-                    <div className='w-full h-2/10 md:h-1/10 p-0 m-0 bg-gray-900 text-white flex items-start md:items-center'>
+                    <div className='w-full h-1/10 md:h-1/10 p-0 m-0 bg-gray-900 text-white flex items-start md:items-center'>
                         <div className='w-1/4 flex items-center'>
                             <img
                                 src={currentSong.thumbnail}
@@ -342,6 +342,9 @@ console.log(error)
                         </div>
                     </div>
                 )}
+                <div className='h-1/10 w-full p-3 absolute bg-black flex justify-center '>
+                <h3 className='font-bold from-purple-600 via-red-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent'>Crafted with <span className='z-20 '>❤️</span> by Veda's</h3>
+                </div>
         </div>
     );
 };
