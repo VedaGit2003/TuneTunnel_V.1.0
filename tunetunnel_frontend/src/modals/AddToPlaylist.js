@@ -24,7 +24,7 @@ const AddToPlaylist = ({ closeModal,addSongToPlaylist}) => {
       onClick={closeModal}
     >
       <div
-        className="relative drop-shadow-xl w-60 md:w-1/3 h-64 overflow-hidden rounded-xl bg-[#2e2c2e]"
+        className="relative  drop-shadow-xl w-60 md:w-1/3 h-64 overflow-hidden rounded-xl bg-[#2e2c2e]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-3 absolute flex flex-col items-center justify-center text-white z-[1] opacity-90 rounded-xl inset-0.5 bg-[#252425]">

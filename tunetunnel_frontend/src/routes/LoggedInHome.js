@@ -7,6 +7,7 @@ import Playlistview from '../components/Pages/Playlistview';
 import NavButton from '../components/shared/NavButton';
 import Logged_in_container from '../containers/Logged_in_container';
 import { makeAuthenticatedGetRequest } from '../utils/serverHelper';
+import SongCardloading from '../components/shared/SongCardloading';
 
 // const LoggedInhome = () => {
 //     const focusCardsData = [
@@ -174,8 +175,9 @@ import { makeAuthenticatedGetRequest } from '../utils/serverHelper';
 //     );
 // };
 
-const LoggedInhome=()=>{
-    const [songData,setSongData]=useState([])
+const LoggedInhome = () => {
+    const [songData, setSongData] = useState([])
+    const [loading, setLoading] = useState(true)
     //     const focusCardsData = [
     //     {
     //         title: "Peaceful Piano",
@@ -203,25 +205,38 @@ const LoggedInhome=()=>{
     //         imgUrl: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     //     },
     // ];
-    useEffect(()=>{
-        const getData=async()=>{
-          const response=await makeAuthenticatedGetRequest('/song/get/allsongs')
-          setSongData(response.data)
+    useEffect(() => {
+        const getData = async () => {
+            const response = await makeAuthenticatedGetRequest('/song/get/allsongs')
+            setSongData(response.data)
         }
         getData()
-        },[])
-        // Function to return a shuffled copy of an array
-        const shuffleArray = (array) => {
-            return array
-                .map((item) => ({ ...item, sort: Math.random() }))
-                .sort((a, b) => a.sort - b.sort)
-                .map(({ sort, ...item }) => item);
-        };
+        // setTimeout(()=>{
+        //     setLoading(false)
+        // },2000)
+        if (getData){
+            setLoading(false)
+        }
+        
+    }, [])
+    // Function to return a shuffled copy of an array
+    const shuffleArray = (array) => {
+        return array
+            .map((item) => ({ ...item, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ sort, ...item }) => item);
+    };
     return (
         <Logged_in_container currentRoute={"home"}>
-            <Playlistview Title={'Focus'} cardsData={shuffleArray(songData)} />
-                        <Playlistview Title={'Favourite'} cardsData={shuffleArray(songData)} />
-                       <Playlistview Title={'Famous'} cardsData={shuffleArray(songData)} />
+          {
+            loading?(
+                <SongCardloading/>
+            ):<>
+                <Playlistview Title={'Focus'} cardsData={shuffleArray(songData)} />
+                <Playlistview Title={'Favourite'} cardsData={shuffleArray(songData)} />
+                <Playlistview Title={'Famous'} cardsData={shuffleArray(songData)} />
+                </>
+          }
         </Logged_in_container>
     )
 }

@@ -15,6 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Library from './routes/Library';
 import SinglePlaylistView from './routes/SinglePlaylistView';
+import SongCardloading from './components/shared/SongCardloading';
 
 // ProtectedRoute component to handle route guarding based on authentication
 // const ProtectedRoute = ({ cookie, children }) => {
@@ -94,6 +95,7 @@ function App() {
                     }
                   />
                   <Route path='/playlist/:playlistID' element={<SinglePlaylistView/>}/>
+                  <Route path='/loading' element={<SongCardloading/>}/>
                   <Route path="*" element={<Navigate to="/home" />} />
                   </Routes>
                   </songContext.Provider>
