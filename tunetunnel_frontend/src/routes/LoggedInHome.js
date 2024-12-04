@@ -178,7 +178,63 @@ import SongCardloading from '../components/shared/SongCardloading';
 const LoggedInhome = () => {
     const [songData, setSongData] = useState([])
     const [loading, setLoading] = useState(true)
-    //     const focusCardsData = [
+   
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         const response = await makeAuthenticatedGetRequest('/song/get/allsongs')
+    //         setSongData(response.data)
+    //     }
+    //     getData()
+    //     // setTimeout(()=>{
+    //     //     // setLoading(false)
+    //     //     // getData()
+
+    //     // },4000)
+    //     if (getData){
+    //         setLoading(false)
+    //     }
+
+        
+    // }, [])
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const response = await makeAuthenticatedGetRequest('/song/get/allsongs');
+                setSongData(response.data);
+            } catch (error) {
+                console.error('Error fetching songs:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        getData();
+    }, []);
+
+    // Function to return a shuffled copy of an array
+    const shuffleArray = (array) => {
+        return array
+            .map((item) => ({ ...item, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ sort, ...item }) => item);
+    };
+    return (
+        <Logged_in_container currentRoute={"home"}>
+          {
+            loading?(
+                <SongCardloading/>
+            ):<>
+                <Playlistview Title={'Focus'} cardsData={shuffleArray(songData)} />
+                <Playlistview Title={'Favourite'} cardsData={shuffleArray(songData)} />
+                <Playlistview Title={'Famous'} cardsData={shuffleArray(songData)} />
+                </>
+          }
+        </Logged_in_container>
+    )
+}
+
+export default LoggedInhome;
+// https://res.cloudinary.com/dsdpnz2xz/video/upload/v1724018340/p0rawlyq…
+// const focusCardsData = [
     //     {
     //         title: "Peaceful Piano",
     //         description: "Relax and indulge with beautiful piano pieces",
@@ -205,41 +261,3 @@ const LoggedInhome = () => {
     //         imgUrl: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
     //     },
     // ];
-    useEffect(() => {
-        const getData = async () => {
-            const response = await makeAuthenticatedGetRequest('/song/get/allsongs')
-            setSongData(response.data)
-        }
-        getData()
-        // setTimeout(()=>{
-        //     setLoading(false)
-        // },2000)
-        if (getData){
-            setLoading(false)
-        }
-        
-    }, [])
-    // Function to return a shuffled copy of an array
-    const shuffleArray = (array) => {
-        return array
-            .map((item) => ({ ...item, sort: Math.random() }))
-            .sort((a, b) => a.sort - b.sort)
-            .map(({ sort, ...item }) => item);
-    };
-    return (
-        <Logged_in_container currentRoute={"home"}>
-          {
-            loading?(
-                <SongCardloading/>
-            ):<>
-                <Playlistview Title={'Focus'} cardsData={shuffleArray(songData)} />
-                <Playlistview Title={'Favourite'} cardsData={shuffleArray(songData)} />
-                <Playlistview Title={'Famous'} cardsData={shuffleArray(songData)} />
-                </>
-          }
-        </Logged_in_container>
-    )
-}
-
-export default LoggedInhome;
-// https://res.cloudinary.com/dsdpnz2xz/video/upload/v1724018340/p0rawlyq…
